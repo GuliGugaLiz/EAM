@@ -1,4 +1,4 @@
-import { queryAsset, removeAsset, addAsset } from '../services/api';
+import { queryAsset, removeAsset, addAsset, updateAsset } from '../services/api';
 
 export default {
   namespace: 'asset',
@@ -25,6 +25,13 @@ export default {
         payload: response,
       });
       if (callback) callback();
+    },
+    *update({ payload, callback},{ call, put }){
+      const response = yield call(updateAsset, payload);
+      yield put({
+        type: 'save',
+        payload:response
+      });
     },
     *remove({ payload, callback }, { call, put }) {
       const response = yield call(removeAsset, payload);

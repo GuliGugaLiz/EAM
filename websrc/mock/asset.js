@@ -18,7 +18,7 @@ for (let i = 0; i < 46; i += 1) {
     create_time: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
     progress: Math.ceil(Math.random() * 100),
     storageLocation:Math.floor(Math.random() * 10) % 2 ? '武汉' : '珠海',
-    userState:Math.floor(Math.random() * 10) % 2 ? '使用中' : '未使用',
+    useState:Math.floor(Math.random() * 10) % 2 ? '使用中' : '未使用',
 
     // id:i,
     // name:`num${i}`,
@@ -113,7 +113,8 @@ export function postAsset(req, res, u, b) {
         currentValue:Math.floor(Math.random() * 1000),
         storageLocation:Math.floor(Math.random() * 10) % 2 ? '武汉' : '珠海',
         userDepartment:Math.floor(Math.random() * 10) % 2 ? '部门1' : '部门2',
-        memo:'备注信息',      
+        memo:'备注信息',  
+        useState:Math.floor(Math.random() * 10) % 2 ? '使用中' : '未使用',    
       });
       break;
     default:

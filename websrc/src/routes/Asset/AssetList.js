@@ -206,7 +206,6 @@ export default class TableList extends PureComponent {
     const confirm = Modal.confirm;
     confirm({
       title: '确定删除选中的数据吗',
-      //content: 'Some descriptions',
       okText: '确定',
       okType: 'danger',
       cancelText: '取消',
@@ -258,7 +257,6 @@ export default class TableList extends PureComponent {
     );
   }
 
-
   renderForm() {
     return this.state.expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
@@ -279,28 +277,28 @@ export default class TableList extends PureComponent {
   const columns = [
   {
     title: '资产编号',
-    dataIndex: 'Id',
+    dataIndex: 'id',
   },{
     title: '资产名称',
-    dataIndex: 'Name',
+    dataIndex: 'name',
   },{
     title:'资产分类',
-    dataIndex:'ClassName',
+    dataIndex:'className',
   },{
     title:'品牌',
-    dataIndex:'Brand',
+    dataIndex:'brand',
   },{
     title: '资产状态',
-    dataIndex: 'UseState',
+    dataIndex: 'useState',
   },{
     title: '当前价值',
-    dataIndex:'CurrentValue'
+    dataIndex:'currentValue'
   },{
     title: '存放地点',
-    dataIndex:'StorageLocation'
+    dataIndex:'storageLocation'
   },{
     title: '购入日期',
-    dataIndex: 'PurchaseDate',
+    dataIndex: 'purchaseDate',
     sorter: true,
     render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm')}</span>,
   },{
@@ -309,7 +307,7 @@ export default class TableList extends PureComponent {
      <Fragment>
      <a name="edit" key={index} onClick={() => this.handleItemEdit(record)}>编辑</a> 
      <Divider type="vertical" />
-     <a name="detial" key={index} onClick={() => this.handleDetial(record)}>详细</a>
+     <a name="detial" key={text} onClick={() => this.handleDetial(record)}>详细</a>
      </Fragment>
     }
 ];
@@ -455,13 +453,9 @@ const dataList = [
               {
                 selectedRows.length > 0 && (
                   <span>
-                    <Button onClick={() =>
-                      this.handleDelete(selectedRows)}>删除</Button>
-                    <Dropdown overlay={menu}>
-                      <Button >
-                        更多操作 <Icon type="down" />
-                      </Button>
-                    </Dropdown>
+                    <Button icon="delete" type="primary" onClick={() =>
+                    this.handleDelete(selectedRows)}>删除</Button>
+                    
                   </span>
                 )
               }

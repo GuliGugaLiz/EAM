@@ -12,8 +12,6 @@ import styles from './UserList.less';
 const FormItem = Form.Item;
 const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
-// const roleMap = ['admin', 'workers'];
-// const role = ['管理员', '维护人员'];
 
 @connect(({ user, loading }) => ({
   user,
@@ -252,11 +250,6 @@ export default class TableList extends PureComponent {
     const { user: { data }, loading } = this.props;
     const { selectedRows, addModalVisible,editModalVisible, record } = this.state;
     //console.info(data)
-    const menu = (
-      <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
-        <Menu.Item key="remove">禁用</Menu.Item>
-      </Menu>
-    );
 
     const parentMethods = {
       handleAdd: this.handleAdd,

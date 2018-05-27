@@ -1,4 +1,4 @@
-import { queryTag} from '../services/api';
+import { queryTag, updateTag, removeTag} from '../services/api';
 
 export default {
   namespace: 'tag',
@@ -18,6 +18,20 @@ export default {
         payload: response,
       });
     },
+    *update({payload}, { call, put }){
+      const response = yield call(updateTag,payload);
+      yield put({
+        type:'save',
+        payload:response
+      });
+    },
+    *remove({payload}, { call, put}){
+      const response = yield call(removeTag,payload);
+      yield put({
+        type:'save',
+        payload:response
+      });
+    }
   },
 
   reducers: {

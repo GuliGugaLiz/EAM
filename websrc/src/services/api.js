@@ -57,12 +57,42 @@ export async function addAsset(params) {
   });
 }
 
+export async function updateAsset(params) {
+  return request('/api/asset',{
+    method: 'POST',
+    body:{
+      ...params,
+      method:'update'
+    }
+  });
+}
+
+export async function removeTag(params) {
+  return request('/api/tag', {
+    method: 'POST',
+    body: {
+      ...params,
+      method: 'delete',
+    },
+  });
+}
+
 export async function queryChange(params){
   return request(`/api/change?${stringify(params)}`);
 }
 
 export async function queryTag(params){
   return request(`/api/tag?${stringify(params)}`);
+}
+
+export async function updateTag(params) {
+  return request('/api/tag',{
+    method: 'POST',
+    body:{
+      ...params,
+      method:'update'
+    }
+  });
 }
 
 export async function queryMaintainer(params){

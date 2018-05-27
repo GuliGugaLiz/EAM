@@ -35,6 +35,7 @@ export default {
       });
       if (callback) callback();
     },
+    
     *remove({ payload, callback }, { call, put }) {
       const response = yield call(removeUsers, payload);
       yield put({
@@ -44,32 +45,15 @@ export default {
       if (callback) callback();
     },
   
-    *removeUsers({payload,callback},{call,put,select}){
-      const response = yield call(removeUsers,payload);
-      const page = yield select(state => state.data)
-      yield put({
-        type:'fetch',
-        payload:page,
-      });
-      if (callback) callback();
-    },
-    *updateUsers({id,params},{call,put,select}){
-      yield call(updateUsers,id,params);
+    *update({payload},{call,put,select}){
+      yield call(updateUsers,payload);
       const response = yield call(updateUsers,payload);
       yield put({
-        type:'updateUsers',
+        type:'save',
         payload:response,
       });
     },
-    *update({payload},{select,call,put}){
-      const id = yield select(({user}) => user.currentUser.id)
-      const newUser = {...payload,id}
-      const data = yield call(update,newUser)
-      yield put({
-        type:'save',
-      
-      });
-    },
+
   },
 
   reducers: {
@@ -94,17 +78,5 @@ export default {
         },
       };
     },
-    deleteUsers(state,action){
-      return {
-        ...state,
-        data:action.payload,
-      };
-    },
-    updateUsers(state,action) {
-      return {
-        ...state,
-        data:action.payload,
-      };
-    }
   },
 };

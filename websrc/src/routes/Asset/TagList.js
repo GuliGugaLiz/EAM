@@ -4,6 +4,7 @@ import moment from 'moment';
 import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message, Badge, Divider } from 'antd';
 import StandardTable from 'components/StandardTable';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import TagImport from './TagImport';
 import TagEdit from './TagEdit';
 
 import styles from './TagList.less';
@@ -19,7 +20,7 @@ const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 @Form.create()
 export default class TableList extends PureComponent {
   state = {
-    modalVisible: false,
+    addModalVisible: false,
     editModalVisible:false,
     expandForm: false,
     selectedRows: [],
@@ -133,9 +134,9 @@ export default class TableList extends PureComponent {
     });
   }
 
-  handleModalVisible = (flag) => {
+  handleAddModalVisible = (flag) => {
     this.setState({
-      modalVisible: !!flag,
+      addModalVisible: !!flag,
     });
   }
 
@@ -170,7 +171,7 @@ export default class TableList extends PureComponent {
 
     message.success('添加成功');
     this.setState({
-      modalVisible: false,
+      addModalVisible: false,
     });
   }
 
@@ -243,7 +244,7 @@ export default class TableList extends PureComponent {
 
   render() {
     const { tag: { data }, loading } = this.props;
-    const { selectedRows, modalVisible, record, editModalVisible } = this.state;
+    const { selectedRows, addModalVisible, record, editModalVisible } = this.state;
 
     const columns = [
       {
@@ -307,7 +308,7 @@ export default class TableList extends PureComponent {
     const parentMethods = {
       handleAdd: this.handleAdd,
       handleEdit:this.handleEdit,
-      handleModalVisible: this.handleModalVisible,
+      handleAddModalVisible: this.handleAddModalVisible,
       handleEditModalVisible:this.handleEditModalVisible,
     };
 
@@ -319,15 +320,14 @@ export default class TableList extends PureComponent {
               {this.renderForm()}
             </div>
             <div className={styles.tableListOperator}>
-              <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>
+              <Button icon="plus" type="primary" onClick={() => this.handleAddModalVisible(true)}>
                 导入
               </Button>
               {
                 selectedRows.length > 0 && (
                   <span>
-                  <Button onClick={() =>
-                    this.handleDelete(selectedRows)}>删除</Button>
-                    
+                  <Button icon="delete" type="primary" onClick={() =>
+                    this.handleDelete(selectedRows)}>删除</Button>                    
                   </span>
                 )
               }
@@ -342,6 +342,11 @@ export default class TableList extends PureComponent {
             />
           </div>
         </Card>
+        <TagImport
+          {...parentMethods}
+          modalVisible={addModalVisible}
+        />
+
         <TagEdit
           {...parentMethods}
           modalVisible={editModalVisible}
